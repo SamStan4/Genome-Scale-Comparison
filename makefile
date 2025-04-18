@@ -26,7 +26,18 @@ clean:
 
 run: $(TARGET)
 	@if [ -f $(TARGET) ]; then \
-		./$(TARGET) input/base-sample.fasta; \
+		./$(TARGET) \
+		input/Covid_Australia.fasta \
+		input/Covid_Brazil.fasta \
+		input/Covid_India.fasta \
+		input/Covid_USA-CA4.fasta \
+		input/Covid_Wuhan.fasta \
+		input/MERS_2012_KF600620.fasta \
+		input/MERS_2014_KY581694.fasta \
+		input/MERS_2014_USA_KP223131.fasta \
+		input/SARS_2003_GU553363.fasta \
+		input/SARS_2017_MK062179.fasta \
+		; \
 	else \
 		echo "Error: Executable $(TARGET) not found. Please build it first."; \
 		exit 1; \
