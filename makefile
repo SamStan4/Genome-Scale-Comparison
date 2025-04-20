@@ -27,7 +27,7 @@ clean:
 run: $(TARGET)
 	@if [ -f $(TARGET) ]; then \
 		./$(TARGET) \
-		input/.config \
+		input/alignment-params.config \
 		input/Covid_Australia.fasta \
 		input/Covid_Brazil.fasta \
 		input/Covid_India.fasta \

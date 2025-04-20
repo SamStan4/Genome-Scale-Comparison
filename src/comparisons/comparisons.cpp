@@ -23,6 +23,7 @@ void execute_single_comparison(
     alignment::execute_modified_global_alignment(suffix_one, suffix_two, 1, -2, -5, -2);
   result_dest[i][j] = result;
   result_dest[j][i] = result;
+  std::cout << "here " << i << " " << j << std::endl;
 }
 
 namespace comparisons {
@@ -32,14 +33,15 @@ namespace comparisons {
     std::vector<std::thread> threads;
     for (size_t i = 0; i < strings_size; ++i) {
       for (size_t j = i + 1; j < strings_size; ++j) {
-        threads.emplace_back(
-          execute_single_comparison,
-          strings[i],
-          strings[j],
-          i,
-          j,
-          std::ref(results)
-        );
+        // threads.emplace_back(
+        //   execute_single_comparison,
+        //   strings[i],
+        //   strings[j],
+        //   i,
+        //   j,
+        //   std::ref(results)
+        // );
+        execute_single_comparison(strings[i], strings[j], i, j, results);
       }
     }
     for (size_t i = 0; i < threads.size(); ++i) {

@@ -1,9 +1,8 @@
 #include <iostream>
-#include "./comparisons/comparisons.hpp"
+#include "./wrapper/program_wrapper.hpp"
 
 int main(int argc, char** argv) {
-  for (int i = 0; i < argc; ++i) {
-    std::cout << "{" << argv[i] << "}" << std::endl;
-  }
+  program_wrapper& app = program_wrapper::get_instance();
+  app.run_program(argc, argv);
   return 0;
 }
