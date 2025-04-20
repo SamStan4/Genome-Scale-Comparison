@@ -1,4 +1,5 @@
 #include <iostream>
+#include "./comparisons/comparisons.hpp"
 
 int main(int argc, char** argv) {
   for (int i = 0; i < argc; ++i) {

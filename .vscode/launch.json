@@ -8,8 +8,8 @@
       "args": [],
       "stopAtEntry": false,
       "externalConsole": true,
-      "cwd": "c:/Users/samue/Desktop/Genome-Scale-Comparison/src",
-      "program": "c:/Users/samue/Desktop/Genome-Scale-Comparison/src/build/Debug/outDebug",
+      "cwd": "c:/Users/samue/Desktop/comp-genomics/Genome-Scale-Comparison/src/comparisons/suffix_tree",
+      "program": "c:/Users/samue/Desktop/comp-genomics/Genome-Scale-Comparison/src/comparisons/suffix_tree/build/Debug/outDebug",
       "MIMode": "gdb",
       "miDebuggerPath": "gdb",
       "setupCommands": [
