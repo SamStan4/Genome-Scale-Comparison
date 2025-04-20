@@ -2,6 +2,7 @@
 #define __COMPARISONS_HPP__
 
 #include <thread>
+#include <mutex>
 #include <string>
 #include <vector>
 #include "./alignment/alignment.hpp"
@@ -10,7 +11,9 @@
 void execute_single_comparison(
   const std::string&,
   const std::string&,
-  size_t*
+  const size_t,
+  const size_t,
+  std::vector<std::vector<size_t>>&
 );
 
 namespace comparisons {
