@@ -29,13 +29,35 @@ void program_wrapper::run_program(const int arg_count, const char* const* arg_ve
     }
     gene_strings.push_back(cur_gene_string);
   }
-  auto result = comparisons::execute_comparisons(gene_strings);
-  std::ofstream resutl_stream("./output.csv");
-  for (size_t i = 0; i < result.size(); ++i) {
-    for (size_t j = 0; j < result[i].size(); ++j) {
-      resutl_stream << result[i][j] << ",";
-    }
-    resutl_stream << std::endl;
+  std::chrono::duration<double> tree_elapsed;
+  std::chrono::duration<double> alignment_elapsed;
+  std::vector<std::vector<size_t>> result = comparisons::execute_comparisons(
+    gene_strings,
+    match_score,
+    mismatch_score,
+    opening_gap_score,
+    gap_extension_score,
+    tree_elapsed,
+    alignment_elapsed
+  );
+  std::ofstream result_stream("./output.csv");
+
+  for (size_t i = 2; i < static_cast<size_t>(arg_count); ++i) {
+    result_stream << (i - 2) << "," << arg_vector[i] << std::endl;
   }
-  resutl_stream.close();
+  result_stream << std::endl << ",";
+  for (size_t i = 2; i < static_cast<size_t>(arg_count); ++i) {
+    result_stream << (i -2) << ",";
+  }
+  result_stream << std::endl;
+  for (size_t i = 0; i < result.size(); ++i) {
+    result_stream << i << ",";
+    for (size_t j = 0; j < result[i].size(); ++j) {
+      result_stream << result[i][j] << ",";
+    }
+    result_stream << std::endl;
+  }
+  result_stream << std::endl;
+  result_stream << "tree time," << tree_elapsed.count() << " sec," << std::endl << "alignment time," << alignment_elapsed.count() << " sec," << std::endl;
+  result_stream.close();
 }

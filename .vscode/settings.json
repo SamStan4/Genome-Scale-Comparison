@@ -119,6 +119,12 @@
     "xmemory": "cpp",
     "xtr1common": "cpp",
     "xtree": "cpp",
-    "xutility": "cpp"
+    "xutility": "cpp",
+    "chrono": "cpp",
+    "forward_list": "cpp",
+    "iomanip": "cpp",
+    "mutex": "cpp",
+    "strstream": "cpp",
+    "unordered_set": "cpp"
   }
 }
