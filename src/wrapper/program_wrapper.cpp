@@ -147,6 +147,7 @@ void program_wrapper::run_program_time(const int arg_count, const char* const* a
   for (size_t i = 2; i < static_cast<size_t>(arg_count); ++i) {
     result_stream << (i -2) << ",";
   }
+  result_stream << std::endl;
   for (size_t i = 0; i < tree_times.size(); ++i) {
     result_stream << i << ",";
     for (size_t j = 0; j < tree_times[i].size(); ++j) {
@@ -159,6 +160,7 @@ void program_wrapper::run_program_time(const int arg_count, const char* const* a
   for (size_t i = 2; i < static_cast<size_t>(arg_count); ++i) {
     result_stream << (i -2) << ",";
   }
+  result_stream << std::endl;
   for (size_t i = 0; i < alignment_times.size(); ++i) {
     result_stream << i << ",";
     for (size_t j = 0; j < alignment_times[i].size(); ++j) {
