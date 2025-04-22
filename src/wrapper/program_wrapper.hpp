@@ -16,6 +16,8 @@ public:
     program_wrapper& operator=(const program_wrapper&) = delete;
     static program_wrapper& get_instance(void);
     void run_program(const int arg_count, const char* const* arg_vector);
+    void run_program_lcs(const int arg_count, const char* const* arg_vector);
+    void run_program_time(const int arg_count, const char* const* arg_vector);
 };
 
 #endif

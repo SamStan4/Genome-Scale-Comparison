@@ -134,4 +134,75 @@ namespace comparisons {
     alignment_elapsed_out = alignment_elapsed;
     return results;
   }
+
+  std::vector<std::vector<size_t>> execute_comparisons_lcs(
+    std::vector<std::string>& strings
+  ) {
+    const size_t strings_size = strings.size();
+    std::vector<std::vector<size_t>> results(strings_size, std::vector<size_t>(strings_size, 0));
+    for (size_t i = 0; i < strings_size; ++i) {
+      for (size_t j = i; j < strings_size; ++j) {
+        size_t lcs_size = 0;
+        if (i == j) {
+          lcs_size = strings[i].size();
+        } else {
+          #if USE_MC_SUFFIX_TREE
+            lcs_size = suffix_tree({strings[i], strings[j]}).get_lrs(0, 1).first;
+          #else
+            lcs_size = longest_common_substring(strings[i], strings[j]).first;
+          #endif
+        }
+        results[i][j] = lcs_size;
+        results[j][i] = lcs_size;
+      }
+    }
+    return results;
+  }
+
+  std::pair<
+    std::vector<
+      std::vector<
+        std::chrono::duration<double>
+      >
+    >,
+    std::vector<
+      std::vector<
+        std::chrono::duration<double>
+      >
+    >
+  > execute_comparisons_times(
+    std::vector<std::string>& strings,
+    const int64_t match_score,
+    const int64_t mismatch_score,
+    const int64_t opening_gap_score,
+    const int64_t gap_extension_score
+  ) {
+    std::chrono::duration<double> tree_elapsed = std::chrono::duration<double>::zero();
+    std::chrono::duration<double> alignment_elapsed = std::chrono::duration<double>::zero();
+    const size_t strings_size = strings.size();
+    std::vector<std::vector<size_t>> results(strings_size, std::vector<size_t>(strings_size, 0));
+    std::vector<std::vector<std::chrono::duration<double>>> tree_time_results(strings_size, std::vector<std::chrono::duration<double>>(strings_size, std::chrono::duration<double>::zero()));
+    std::vector<std::vector<std::chrono::duration<double>>> alignment_time_results(strings_size, std::vector<std::chrono::duration<double>>(strings_size, std::chrono::duration<double>::zero()));
+    for (size_t i = 0; i < strings_size; ++i) {
+      for (size_t j = i; j < strings_size; ++j) {
+        auto [new_tree_elapsed, new_alignment_elapsed] = execute_single_comparison(
+          strings[i],
+          strings[j],
+          i,
+          j,
+          results,
+          match_score,
+          mismatch_score,
+          opening_gap_score,
+          gap_extension_score
+        );
+        tree_time_results[i][j] = new_tree_elapsed;
+        tree_time_results[j][i] = new_tree_elapsed;
+        alignment_time_results[i][j] = new_alignment_elapsed;
+        alignment_time_results[j][i] = new_alignment_elapsed;
+      }
+    }
+    return {tree_time_results, alignment_time_results};
+  }
 }
+
