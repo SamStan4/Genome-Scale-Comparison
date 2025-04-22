@@ -38,7 +38,7 @@ private:
   suffix_tree_node* find_path_and_insert(suffix_tree_node*, const char*, const size_t);
   suffix_tree_node* split_edge(suffix_tree_node*, size_t, const size_t);
   size_t get_string_size(const size_t) const;
-  size_t get_lrs_start(suffix_tree_node*, suffix_tree_node*, size_t) const;
+  size_t get_lrs_start(suffix_tree_node*, suffix_tree_node*) const;
   std::vector<size_t> get_lrs_starts(suffix_tree_node*, size_t);
 };
 

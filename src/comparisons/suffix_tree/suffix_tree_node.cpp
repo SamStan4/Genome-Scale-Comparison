@@ -1,10 +1,17 @@
 #include "./suffix_tree_node.hpp"
 
 suffix_tree_node::suffix_tree_node() :
-  m_parent_ptr(nullptr), m_child_ptr(nullptr),
-  m_next_sib_ptr(nullptr), m_prev_sib_ptr(nullptr),
-  m_suffix_link_ptr(nullptr), m_start(nullptr),
-  m_size(0), m_depth(0), m_id(-1), m_owner(0) {
+  m_parent_ptr(nullptr),
+  m_child_ptr(nullptr),
+  m_next_sib_ptr(nullptr),
+  m_prev_sib_ptr(nullptr),
+  m_suffix_link_ptr(nullptr),
+  m_start(nullptr),
+  m_size(0),
+  m_depth(0),
+  m_owner(0),
+  m_id(-1),
+  m_visitors() {
 }
 
 suffix_tree_node::~suffix_tree_node() {

@@ -64,7 +64,7 @@ std::pair<size_t, std::vector<size_t>> suffix_tree::get_lrs(size_t str_id) {
   suffix_tree_node* cur_ptr = deepest_internal->m_child_ptr;
   while (cur_ptr) {
     if (cur_ptr->is_visited_by(str_id)) {
-      size_t lrs_start = this->get_lrs_start(cur_ptr, deepest_internal, str_id);
+      size_t lrs_start = this->get_lrs_start(cur_ptr, deepest_internal);
       occurrences.push_back(lrs_start);
     }
     cur_ptr = cur_ptr->m_next_sib_ptr;
@@ -334,12 +334,7 @@ suffix_tree_node* suffix_tree::split_edge(suffix_tree_node* cur_ptr, size_t size
   return new_internal_ptr;
 }
 
-// size_t suffix_tree::get_lrs_start(suffix_tree_node* child, suffix_tree_node* internal) const {
-//   const char* base = this->m_strs[child->m_owner].c_str();
-//   return static_cast<size_t>(child->m_start - base) - internal->m_depth;
-// }
-
-size_t suffix_tree::get_lrs_start(suffix_tree_node* child, suffix_tree_node* internal, size_t str_id) const {
+size_t suffix_tree::get_lrs_start(suffix_tree_node* child, suffix_tree_node* internal) const {
   const char* base = this->m_strs[child->m_owner].c_str();
   return static_cast<size_t>(child->m_start - base) - internal->m_depth;
 }
@@ -349,9 +344,8 @@ std::vector<size_t> suffix_tree::get_lrs_starts(suffix_tree_node* common_ptr, si
   suffix_tree_node* cur_ptr = common_ptr->m_child_ptr;
   bool found_flag = false;
   while (cur_ptr) {
-    // if (cur_ptr->is_visited_by(str_id)) {
     if (cur_ptr->m_owner == str_id) {
-      lrs_starts.push_back(get_lrs_start(cur_ptr, common_ptr, str_id));
+      lrs_starts.push_back(get_lrs_start(cur_ptr, common_ptr));
       found_flag = true;
     }
     cur_ptr = cur_ptr->m_next_sib_ptr;
